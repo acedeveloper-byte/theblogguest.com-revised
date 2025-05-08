@@ -13,8 +13,6 @@ export default async function Home() {
   const travel = await axios.get(`${HOST}post/fetch-all-post-by-category/travel`);
   const travelresp = travel.data?.response || [];
 
-  // Safe logging
-  console.log("Travel response:", travelresp);
   return (
     <>
 
