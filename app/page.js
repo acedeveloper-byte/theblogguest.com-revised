@@ -1,4 +1,4 @@
-
+'use client'
 import Header from "@/components/common/Header";
 import Footer from "@/components/common/Footer";
 import "./globals.css"
@@ -6,13 +6,22 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from "axios";
 import MediumCard from "@/components/common/MediumCard";
 import { HOST } from "@/utils/static";
+import { useEffect, useState } from "react";
 
 
 export default async function Home() {
+  const [state, setState] = useState()
+  const handleCallApi = async () => {
 
-  const travel = await axios.get(`${HOST}post/fetch-all-post-by-category/travel`);
-  const travelresp = travel.data?.response || [];
+    const travel = await axios.get(`${HOST}post/fetch-all-post-by-category/travel`);
+    const travelresp = travel.data?.response || [];
+    setState(travelresp)
+  }
 
+
+  useEffect(() => {
+    handleCallApi()
+  }, [])
   return (
     <>
 
@@ -79,13 +88,13 @@ export default async function Home() {
             </div>
             <div className="col-lg-6">
               <div className="row">
-                {travelresp.map((item, index) => {
+                {/* {state.map((item, index) => {
 
                   return (
                     <MediumCard categoryName={item.category} title={item.title} shortDescription={""} image={`${HOST}resources/post/${item.image}`} />
 
                   )
-                })}
+                })} */}
 
               </div>
             </div>
