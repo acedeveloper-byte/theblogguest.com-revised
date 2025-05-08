@@ -5,7 +5,7 @@ const MediumCard = ({ categoryName, title, shortDescription, image }) => {
         <>
             <div className="col-md-6">
                 <div className="card mb-3 Travell">
-                    <h5 className="border-start border-danger border-3 ps-2 mb-3 mx-2">{categoryName.toUppercase()}</h5>
+                    <h5 className="border-start border-danger border-3 ps-2 mb-3 mx-2">{categoryName?.toUppercase()}</h5>
                     <img src={image} alt="..." className="card-image" />
                     <div className="card-body p-2">
                         <div className="text-uppercase text-danger fw-bold small">{categoryName}</div>
