@@ -80,13 +80,10 @@ export default async function Home() {
             <div className="col-lg-6">
               <div className="row">
                 {travelresp.map((item, index) => {
-
                   return (
                     <MediumCard categoryName={item.category} title={item.title} shortDescription={""} image={`${HOST}resources/post/${item.image}`} />
-
                   )
                 })}
-
               </div>
             </div>
           </div>
