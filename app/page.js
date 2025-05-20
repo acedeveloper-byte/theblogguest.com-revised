@@ -21,7 +21,7 @@ export default async function Home() {
       <Header />
 
       <RecentNews />
-      <AllCategory />
+      {/* <AllCategory /> */}
 
       <Footer />
 
