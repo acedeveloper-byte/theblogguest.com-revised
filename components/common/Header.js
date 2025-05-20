@@ -14,7 +14,7 @@ const Header = () => {
             <div className="top-header py-2 bg-white border-bottom">
                 <div className="container d-flex justify-content-between align-items-center flex-wrap">
                     <div className="logo">
-                       <Link href="/"> <img
+                        <Link href="/"> <img
                             src=""
                             alt="Logo"
                             className="img-fluid"
@@ -63,7 +63,7 @@ const Header = () => {
                                 'Sales',
                             ].map((item, index) => (
                                 <li className="nav-item" key={index}>
-                                    <a className="nav-link text-uppercase fw-medium text-white" href="#">
+                                    <a className="nav-link  text-white" href="#" style={{ fontWeight: '400' }}>
                                         {item}
                                     </a>
                                 </li>
