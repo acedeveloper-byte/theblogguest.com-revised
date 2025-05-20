@@ -20,8 +20,8 @@ export default async function Home() {
 
       <Header />
 
-      {/* <RecentNews /> */}
-      <AllCategory />
+      {/* <RecentNews />
+      <AllCategory /> */}
 
       <Footer />
 
