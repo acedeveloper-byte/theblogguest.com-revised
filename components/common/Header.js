@@ -1,38 +1,80 @@
-import React from 'react'
+'use client'
+import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import 'bootstrap-icons/font/bootstrap-icons.css';
+import Link from 'next/link';
+
+
 
 const Header = () => {
     return (
         <header>
-            <div class="top-header">
-                <div class="container-fluid d-flex justify-content-between align-items-center flex-wrap">
-                    <div class="logo"><h6>LOGO Herer</h6></div>
-                    <div class="ad-banner">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ18AAZ2bPjf3eiYgtZDt4IEK8cIW94FpWFGA&s" alt="Ad Banner" />
+            {/* Top Header */}
+            <div className="top-header py-2 bg-white border-bottom">
+                <div className="container d-flex justify-content-between align-items-center flex-wrap">
+                    <div className="logo">
+                       <Link href="/"> <img
+                            src=""
+                            alt="Logo"
+                            className="img-fluid"
+                            style={{ maxHeight: '60px' }}
+                        />
+                        </Link>
+                    </div>
+                    <div className="ad-banner">
+                        <img
+                            src=""
+                            alt="Ad Banner"
+                            className="img-fluid"
+                            style={{ maxHeight: '60px' }}
+                        />
                     </div>
                 </div>
             </div>
-            <nav className="navbar-expand-lg navbar-custom">
-                <div class="container-fluid">
 
-                    <div class="row row-list">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li class="nav-item"><a class="nav-link" href="#">Tech</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Courses</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Business</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Entertainment</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Health</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Lifestyle</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Social Media</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Link Building</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Hot Photos</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Write for Us</a></li>
+            {/* Navbar */}
+            <nav className="navbar navbar-expand-lg navbar-dark  navbar-layout">
+                <div className="container">
+                    {/* Toggle Button */}
+                    <button
+                        className="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#navbarMenu"
+                        aria-controls="navbarMenu"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation"
+                    >
+                        <span className="navbar-toggler-icon"></span>
+                    </button>
+
+                    {/* Navbar Links */}
+                    <div className="collapse navbar-collapse" id="navbarMenu">
+                        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                            {[
+                                'Technology',
+                                'Health Lifestyle',
+                                'Fashion',
+                                'Entertainment',
+                                'Design',
+                                'Sports',
+                                'Travels',
+                                'Sales',
+                            ].map((item, index) => (
+                                <li className="nav-item" key={index}>
+                                    <a className="nav-link text-uppercase fw-medium text-white" href="#">
+                                        {item}
+                                    </a>
+                                </li>
+                            ))}
                         </ul>
-                        <i class="bi bi-search search-icon"></i>
+                        <i className="bi bi-search text-white fs-5 ms-lg-3"></i>
                     </div>
                 </div>
             </nav>
         </header>
-    )
-}
+    );
+};
 
-export default Header
+export default Header;
