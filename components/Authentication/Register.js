@@ -7,7 +7,7 @@ const Login = () => {
     const [passwordShown, setPasswordShown] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
-    const togglePassword = () => setPasswordShown(!passwordShown);
+    const togglePassword = () => setPasswordShown(!passwordShown);; 
 
     const handleSubmit = (e) => {
         e.preventDefault();
