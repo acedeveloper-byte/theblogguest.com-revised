@@ -17,13 +17,13 @@ export default async function Home() {
 
   return (
     <>
-
-      <Header />
+hii
+      {/* <Header /> */}
 
       {/* <RecentNews />
       <AllCategory /> */}
 
-      <Footer />
+      {/* <Footer /> */}
 
 
 
