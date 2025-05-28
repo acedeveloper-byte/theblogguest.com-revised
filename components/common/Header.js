@@ -63,11 +63,29 @@ const Header = () => {
                                 'Sales',
                             ].map((item, index) => (
                                 <li className="nav-item" key={index}>
-                                    <a className="nav-link  text-white" href="#" style={{ fontWeight: '400' }}>
+                                    <a className="nav-link  text-white" href="/category" style={{ fontWeight: '400' }}>
                                         {item}
                                     </a>
                                 </li>
+                                
                             ))}
+
+                             <li className="nav-item" >
+                                    <a className="nav-link  text-white" href="/login" style={{ fontWeight: '400' }}>
+                                      Login
+                                    </a>
+                                </li>
+
+                                 <li className="nav-item">
+                                    <a className="nav-link  text-white" href="/register" style={{ fontWeight: '400' }}>
+                                      Register
+                                    </a>
+                                </li>
+                                 <li className="nav-item">
+                                    <a className="nav-link  text-white" href="/submit-post" style={{ fontWeight: '400' }}>
+                                      Submit Post
+                                    </a>
+                                </li>
                         </ul>
                         <i className="bi bi-search text-white fs-5 ms-lg-3"></i>
                     </div>

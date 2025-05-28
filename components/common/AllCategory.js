@@ -7,12 +7,16 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 const categories = [
-  { name: "Technology", image: "/images/photo3.jpg" },
-  { name: "Healthy Lifestyle", image: "/images/photo3.jpg" },
-  { name: "Fashion", image: "/images/photo3.jpg" },
-  { name: "Business", image: "/images/photo3.jpg" },
-  { name: "Design", image: "/images/photo3.jpg" },
-  { name: "Education", image: "/images/photo3.jpg" },
+  { name: "Technology", image: "/images/categoryimages/tech.jpg" },
+  { name: "Travel", image: "/images/categoryimages/travel.jpg" },
+  { name: "Sports", image: "/images/categoryimages/sports.jpg" },
+
+  { name: "Healthy Lifestyle", image: "/images/categoryimages/health.jpg" },
+  { name: "Fashion", image: "/images/categoryimages/fashion.jpg" },
+  { name: "Business", image: "/images/categoryimages/business.jpg" },
+  { name: "Design", image: "/images/categoryimages/design.jpg" },
+  { name: "Education", image: "/images/categoryimages/education.jpg" },
+
 ];
 
 // Shared arrow button inline styles (no !important)

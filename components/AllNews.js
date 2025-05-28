@@ -29,22 +29,27 @@ const PrevArrow = ({ onClick }) => (
 
 const AllNews = () => {
   const newsItems = [
-    {
-      title:
-        'Eid al-Adha 2025 Wishes in Arabic; Quotes, Greetings, Images, Messages, Posters, Banners and Instagram Captions',
-      date: 'May 19, 2025 / Veer',
-      image: '/images/dynamic-image.jpg',
-    },
-    {
+     {
       title: 'Breaking: Government announces new digital ID system rollout',
       date: 'May 18, 2025 / Staff',
       image: '/images/dynamic-image.jpg',
     },
-    {
+
+     {
       title: 'International Yoga Day: Top health tips you should follow',
       date: 'May 17, 2025 / Health Desk',
       image: '/images/dynamic-image.jpg',
     },
+
+    {
+      
+      title:
+        'Eid al-Adha 2025 Wishes in Arabic; Quotes, Greetings, Images, Messages, Posters, Banners and Instagram Captions',
+      date: 'May 19, 2025 / Veer',
+      image: '/images/dynamic-image.jpg',
+    }
+   
+   
   ];
 
   const settings = {
