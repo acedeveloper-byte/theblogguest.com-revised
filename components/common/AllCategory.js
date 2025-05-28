@@ -2,6 +2,7 @@
 import React from 'react';
 import Slider from 'react-slick';
 import Image from 'next/image';
+import { FiArrowRight, FiArrowLeft } from 'react-icons/fi';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -14,22 +15,36 @@ const categories = [
   { name: "Education", image: "/images/photo3.jpg" },
 ];
 
+// Shared arrow button inline styles (no !important)
+const arrowStyle = {
+  padding: '3px 10px',
+  border: '0px',
+  background: '#15157cd1',
+  color: '#fff',
+  cursor: 'pointer',
+  margin: '2px'
+};
+
 const NextArrow = ({ onClick }) => (
-  <div
-    className="absolute right-0 top-1/2 z-10 -translate-y-1/2 cursor-pointer bg-white p-2 rounded-full shadow"
+  <button
+    className="absolute right-2 top-1/2 z-10 -translate-y-1/2 rounded-full shadow-md hover:opacity-90 focus:outline-none"
     onClick={onClick}
+    aria-label="Next"
+    style={arrowStyle}
   >
-    ➡️
-  </div>
+    <FiArrowRight size={24} />
+  </button>
 );
 
 const PrevArrow = ({ onClick }) => (
-  <div
-    className="absolute left-0 top-1/2 z-10 -translate-y-1/2 cursor-pointer bg-white p-2 rounded-full shadow"
+  <button
+    className="absolute left-2 top-1/2 z-10 -translate-y-1/2 rounded-full shadow-md hover:opacity-90 focus:outline-none"
     onClick={onClick}
+    aria-label="Previous"
+    style={arrowStyle}
   >
-    ⬅️
-  </div>
+    <FiArrowLeft size={24} />
+  </button>
 );
 
 const AllCategory = () => {
@@ -66,10 +81,10 @@ const AllCategory = () => {
               height={180}
               className="rounded-lg object-cover w-full h-[150px]"
             />
-            <div className="absolute inset-0 bg-black bg-opacity-30 rounded-lg flex items-center justify-center" style={{padding: '6px',
-    textAlign: 'center'
-}}>
-              <span className="text-white text-lg font-bold" >{cat.name}</span>
+            <div
+              className="absolute inset-0 bg-black bg-opacity-30 rounded-lg flex items-center justify-center px-3 text-center"
+            >
+              <span className="text-white text-lg font-bold">{cat.name}</span>
             </div>
           </div>
         ))}

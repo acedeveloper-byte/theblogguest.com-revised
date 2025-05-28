@@ -1,9 +1,11 @@
-'use client'
+'use client';
+
 import { useState } from "react";
 import { Container, Form, Button, Card, InputGroup, Spinner } from "react-bootstrap";
 import { FaEye, FaEyeSlash, FaUser } from "react-icons/fa";
+import Swal from 'sweetalert2';
 
-const Login = () => {
+const Register = () => {
     const [passwordShown, setPasswordShown] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
@@ -16,7 +18,12 @@ const Login = () => {
         // Simulate API call
         setTimeout(() => {
             setIsLoading(false);
-            alert("Registered successfully!"); // Replace with actual logic
+            Swal.fire({
+                icon: 'success',
+                title: 'Registered successfully!',
+                showConfirmButton: false,
+                timer: 2000,
+            });
         }, 2000);
     };
 
@@ -99,4 +106,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default Register;

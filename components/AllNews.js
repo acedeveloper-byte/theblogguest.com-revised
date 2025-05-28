@@ -4,6 +4,7 @@ import Slider from 'react-slick';
 import { Col, Row, Card, Button } from 'react-bootstrap';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import Link from 'next/link';
 
 // 👉 Custom Arrows
 const NextArrow = ({ onClick }) => (
@@ -63,6 +64,8 @@ const AllNews = () => {
 
       <Slider {...settings}>
         {newsItems.map((item, index) => (
+                <Link href="/blog" className='text-decoration-none text-white'>
+
           <Card className="text-white" key={index}>
             <Card.Img src={item.image} alt={item.title} />
             <Card.ImgOverlay className="bg-dark bg-opacity-50 d-flex flex-column justify-content-end">
@@ -72,9 +75,12 @@ const AllNews = () => {
                 </Button>
                 <Card.Title className="fw-bold">{item.title}</Card.Title>
                 <Card.Text className="small">{item.date}</Card.Text>
+
               </div>
             </Card.ImgOverlay>
           </Card>
+                </Link>
+
         ))}
       </Slider>
 
