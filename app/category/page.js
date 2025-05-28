@@ -65,29 +65,29 @@ const page = () => {
 
             <Row>
               {articles.map((article, idx) => (
-               <Col md={6} lg={4} className="mb-4" key={idx}>
-  <Card className="h-100 shadow-sm border-0 rounded-4">
-    <Card.Img
-      variant="top"
-      src={article.img}
-      className="rounded-top-4"
-      style={{ height: '250px', objectFit: 'cover' }}
-    />
-    <Card.Body>
-      {article.badge && (
-        <Badge  className="mb-2" style={{backgroundColor: '#15157cd1'}}>New</Badge>
-      )}
-      <Card.Title className="fw-semibold" style={{ fontSize: '1rem' }}>
-        {article.title}
-      </Card.Title>
-      {article.date && (
-        <Card.Text className="text-muted" style={{ fontSize: '0.8rem' }}>
-          {article.date}
-        </Card.Text>
-      )}
-    </Card.Body>
-  </Card>
-</Col>
+                <Col md={6} lg={4} className="mb-4" key={idx}>
+                  <Card className="h-100 shadow-sm border-0 rounded-4">
+                    <Card.Img
+                      variant="top"
+                      src={article.img}
+                      className="rounded-top-4"
+                      style={{ height: '250px', objectFit: 'cover' }}
+                    />
+                    <Card.Body>
+                      {article.badge && (
+                        <Badge className="mb-2" style={{ backgroundColor: '#15157cd1' }}>New</Badge>
+                      )}
+                      <Card.Title className="fw-semibold" style={{ fontSize: '1rem' }}>
+                        {article.title}
+                      </Card.Title>
+                      {article.date && (
+                        <Card.Text className="text-muted" style={{ fontSize: '0.8rem' }}>
+                          {article.date}
+                        </Card.Text>
+                      )}
+                    </Card.Body>
+                  </Card>
+                </Col>
 
               ))}
             </Row>

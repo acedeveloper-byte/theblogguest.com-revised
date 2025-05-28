@@ -1,6 +1,7 @@
-'use client';
+'use client'; // Only for App Router (remove if using Pages Router)
 
 import { useState } from "react";
+import { useRouter } from 'next/navigation'; // Use 'next/router' if using Pages Router
 import { Container, Form, Button, Card, InputGroup, Spinner } from "react-bootstrap";
 import { FaEye, FaEyeSlash, FaUser } from "react-icons/fa";
 import Swal from 'sweetalert2';
@@ -8,23 +9,64 @@ import Swal from 'sweetalert2';
 const Register = () => {
     const [passwordShown, setPasswordShown] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const router = useRouter();
 
     const togglePassword = () => setPasswordShown(!passwordShown);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setIsLoading(true);
 
-        // Simulate API call
-        setTimeout(() => {
-            setIsLoading(false);
-            Swal.fire({
-                icon: 'success',
-                title: 'Registered successfully!',
-                showConfirmButton: false,
-                timer: 2000,
+        const form = e.target;
+        const user_name = form.elements.formUsername.value;
+        const email = form.elements.formEmail.value;
+        const password = form.elements.formPassword.value;
+
+        try {
+            const response = await fetch('https://api.acedigitalsolution.com/auth/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    user_name,
+                    email,
+                    password,
+                }),
             });
-        }, 2000);
+
+            const data = await response.json();
+
+            if (response.ok) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Registered successfully!',
+                    showConfirmButton: false,
+                    timer: 2000,
+                });
+
+                form.reset();
+
+                // Redirect to Verify OTP page after 2 seconds
+                setTimeout(() => {
+                    router.push(`/verify-otp?email=${encodeURIComponent(email)}`);
+                }, 2000);
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Registration failed',
+                    text: data.message || 'Something went wrong!',
+                });
+            }
+        } catch (error) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: error.message || 'Network error!',
+            });
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (
@@ -49,7 +91,7 @@ const Register = () => {
                                 <InputGroup.Text>
                                     <FaUser />
                                 </InputGroup.Text>
-                                <Form.Control type="text" placeholder="Enter username" required />
+                                <Form.Control type="text" name="user_name" placeholder="Enter username" required />
                             </InputGroup>
                         </Form.Group>
 
@@ -59,7 +101,7 @@ const Register = () => {
                                 <InputGroup.Text>
                                     <FaUser />
                                 </InputGroup.Text>
-                                <Form.Control type="email" placeholder="Enter email" required />
+                                <Form.Control type="email" name="email" placeholder="Enter email" required />
                             </InputGroup>
                         </Form.Group>
 
@@ -71,6 +113,7 @@ const Register = () => {
                                     placeholder="Enter password"
                                     aria-label="Password"
                                     required
+                                    name="password"
                                 />
                                 <InputGroup.Text
                                     onClick={togglePassword}

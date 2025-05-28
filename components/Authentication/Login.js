@@ -1,47 +1,78 @@
 'use client';
 import { useState } from "react";
+import { useRouter } from 'next/navigation';
 import { Container, Form, Button, Card, Row, Col, InputGroup, Spinner } from "react-bootstrap";
 import { FaEye, FaEyeSlash, FaUser } from "react-icons/fa";
 import Swal from 'sweetalert2';
+import axios from 'axios';
 
 const Login = () => {
   const [passwordShown, setPasswordShown] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   const togglePassword = () => setPasswordShown(!passwordShown);
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
+    const form = new FormData(e.target);
+    const email = form.get('email');
+    const password = form.get('password');
+
     setIsLoading(true);
 
-    // Simulate login process
-    setTimeout(() => {
-      setIsLoading(false);
+    try {
+      const options = {
+        method: "POST",
+        url: `https://api.acedigitalsolution.com/auth/login`,
+        data: {
+          email,
+          password
+        },
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "*/*"
+        }
+      };
+
+      const resp = await axios.request(options);
+
+      if (resp.data.baseResponse.message === "REQUEST_FULLFILLED") {
+        localStorage.setItem("auth_data", JSON.stringify(resp.data.response));
+        Swal.fire({
+          icon: 'success',
+          title: 'Logged in successfully!',
+          showConfirmButton: false,
+          timer: 2000,
+        });
+        router.push("/submit-post"); // ✅ Redirect here
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Login Failed',
+          text: resp.data.baseResponse.message
+        });
+      }
+
+    } catch (error) {
       Swal.fire({
-        icon: 'success',
-        title: 'Logged in successfully!',
-        showConfirmButton: false,
-        timer: 2000,
+        icon: 'error',
+        title: 'Something went wrong',
+        text: error?.response?.data?.baseResponse?.message || error.message,
       });
-    }, 2000);
+    }
+
+    setIsLoading(false);
   };
 
   return (
     <div className="login-wrapper">
       <Container className="d-flex justify-content-center align-items-center py-5">
-        <Card
-          className="p-4 login-card"
-          style={{
-            minWidth: '320px',
-            maxWidth: '400px',
-            width: '100%',
-            boxShadow: 'rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px',
-          }}
-        >
+        <Card className="p-4 login-card" style={{ minWidth: '320px', maxWidth: '400px', width: '100%', boxShadow: 'rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px' }}>
           <h2 className="mb-3 login-layout">Log in</h2>
           <p>
             Need a Mailchimp account?{" "}
-            <a href="#" className="text-decoration-none link-primary">
+            <a href="/register" className="text-decoration-none link-primary">
               Create an account
             </a>
           </p>
@@ -53,7 +84,7 @@ const Login = () => {
                 <InputGroup.Text>
                   <FaUser />
                 </InputGroup.Text>
-                <Form.Control type="text" placeholder="Enter username or email" required />
+                <Form.Control type="text" name="email" placeholder="Enter username or email" required />
               </InputGroup>
             </Form.Group>
 
@@ -63,14 +94,10 @@ const Login = () => {
                 <Form.Control
                   type={passwordShown ? "text" : "password"}
                   placeholder="Enter password"
-                  aria-label="Password"
                   required
+                  name="password"
                 />
-                <InputGroup.Text
-                  onClick={togglePassword}
-                  style={{ cursor: "pointer" }}
-                  aria-label="Toggle password visibility"
-                >
+                <InputGroup.Text onClick={togglePassword} style={{ cursor: "pointer" }}>
                   {passwordShown ? <FaEyeSlash /> : <FaEye />}
                 </InputGroup.Text>
               </InputGroup>
@@ -88,14 +115,7 @@ const Login = () => {
             >
               {isLoading ? (
                 <>
-                  <Spinner
-                    as="span"
-                    animation="border"
-                    size="sm"
-                    role="status"
-                    aria-hidden="true"
-                    className="me-2"
-                  />
+                  <Spinner as="span" animation="border" size="sm" className="me-2" />
                   Logging in...
                 </>
               ) : (
