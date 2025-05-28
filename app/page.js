@@ -18,12 +18,12 @@ export default async function Home() {
   return (
     <>
 
-      {/* <Header />
+      <Header />
 
       <RecentNews />
       <AllCategory />
 
-      <Footer /> */}
+      <Footer />
 
 
 
