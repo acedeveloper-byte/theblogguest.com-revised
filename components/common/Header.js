@@ -1,25 +1,27 @@
-'use client'
-import React from 'react';
+'use client';
+import React, { useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import Link from 'next/link';
 
-
-
 const Header = () => {
+    useEffect(() => {
+        import('bootstrap/dist/js/bootstrap.bundle.min.js');
+    }, []);
+
     return (
         <header>
             {/* Top Header */}
             <div className="top-header py-2 bg-white border-bottom">
                 <div className="container d-flex justify-content-between align-items-center flex-wrap">
                     <div className="logo">
-                        <Link href="/"> <img
-                            src=""
-                            alt="Logo"
-                            className="img-fluid"
-                            style={{ maxHeight: '60px' }}
-                        />
+                        <Link href="/">
+                            <img
+                                src=""
+                                alt="Logo"
+                                className="img-fluid"
+                                style={{ maxHeight: '60px' }}
+                            />
                         </Link>
                     </div>
                     <div className="ad-banner">
@@ -34,9 +36,8 @@ const Header = () => {
             </div>
 
             {/* Navbar */}
-            <nav className="navbar navbar-expand-lg navbar-dark  navbar-layout">
+            <nav className="navbar navbar-expand-lg navbar-dark navbar-layout">
                 <div className="container">
-                    {/* Toggle Button */}
                     <button
                         className="navbar-toggler"
                         type="button"
@@ -49,7 +50,6 @@ const Header = () => {
                         <span className="navbar-toggler-icon"></span>
                     </button>
 
-                    {/* Navbar Links */}
                     <div className="collapse navbar-collapse" id="navbarMenu">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                             {[
@@ -63,29 +63,43 @@ const Header = () => {
                                 'Sales',
                             ].map((item, index) => (
                                 <li className="nav-item" key={index}>
-                                    <a className="nav-link  text-white" href="/category" style={{ fontWeight: '400' }}>
+                                    <a
+                                        className="nav-link text-white"
+                                        href="/category"
+                                        style={{ fontWeight: '400' }}
+                                    >
                                         {item}
                                     </a>
                                 </li>
-                                
                             ))}
 
-                             <li className="nav-item" >
-                                    <a className="nav-link  text-white" href="/login" style={{ fontWeight: '400' }}>
-                                      Login
-                                    </a>
-                                </li>
-
-                                 <li className="nav-item">
-                                    <a className="nav-link  text-white" href="/register" style={{ fontWeight: '400' }}>
-                                      Register
-                                    </a>
-                                </li>
-                                 <li className="nav-item">
-                                    <a className="nav-link  text-white" href="/submit-post" style={{ fontWeight: '400' }}>
-                                      Submit Post
-                                    </a>
-                                </li>
+                            <li className="nav-item">
+                                <a
+                                    className="nav-link text-white"
+                                    href="/login"
+                                    style={{ fontWeight: '400' }}
+                                >
+                                    Login
+                                </a>
+                            </li>
+                            <li className="nav-item">
+                                <a
+                                    className="nav-link text-white"
+                                    href="/register"
+                                    style={{ fontWeight: '400' }}
+                                >
+                                    Register
+                                </a>
+                            </li>
+                            <li className="nav-item">
+                                <a
+                                    className="nav-link text-white"
+                                    href="/submit-post"
+                                    style={{ fontWeight: '400' }}
+                                >
+                                    Submit Post
+                                </a>
+                            </li>
                         </ul>
                         <i className="bi bi-search text-white fs-5 ms-lg-3"></i>
                     </div>

@@ -16,7 +16,7 @@ const Login = () => {
     const otp = form.otp.value;
 
     try {
-      const response = await fetch(`https://api.acedigitalsolution.com/auth/verify-otp/${otp}`, {
+      const response = await fetch(`http://localhost:7500/v2/auth/verify-otp/${otp}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

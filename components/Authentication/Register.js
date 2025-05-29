@@ -23,7 +23,7 @@ const Register = () => {
         const password = form.elements.formPassword.value;
 
         try {
-            const response = await fetch('https://api.acedigitalsolution.com/auth/register', {
+            const response = await fetch('http://localhost:7500/v2/auth/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -34,6 +34,7 @@ const Register = () => {
                     password,
                 }),
             });
+                console.log(response)
 
             const data = await response.json();
 

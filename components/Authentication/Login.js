@@ -24,7 +24,7 @@ const Login = () => {
     try {
       const options = {
         method: "POST",
-        url: `https://api.acedigitalsolution.com/auth/login`,
+        url: `http://localhost:7500/v2/auth/login`,
         data: {
           email,
           password
