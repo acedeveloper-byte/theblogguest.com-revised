@@ -1,13 +1,12 @@
 'use client';
-import React, { useEffect } from 'react';
+import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import Link from 'next/link';
 
 const Header = () => {
-    useEffect(() => {
-        import('bootstrap/dist/js/bootstrap.bundle.min.js');
-    }, []);
+    
+   
 
     return (
         <header>
@@ -17,7 +16,7 @@ const Header = () => {
                     <div className="logo">
                         <Link href="/">
                             <img
-                                src=""
+                                src="images/logo/logo.png"
                                 alt="Logo"
                                 className="img-fluid"
                                 style={{ maxHeight: '60px' }}
@@ -26,7 +25,7 @@ const Header = () => {
                     </div>
                     <div className="ad-banner">
                         <img
-                            src=""
+                            src="images/logo/banner.png"
                             alt="Ad Banner"
                             className="img-fluid"
                             style={{ maxHeight: '60px' }}
@@ -77,8 +76,7 @@ const Header = () => {
                                 <a
                                     className="nav-link text-white"
                                     href="/login"
-                                    style={{ fontWeight: '400' }}
-                                >
+                                    style={{ fontWeight: '400' }}  >
                                     Login
                                 </a>
                             </li>
@@ -95,8 +93,7 @@ const Header = () => {
                                 <a
                                     className="nav-link text-white"
                                     href="/submit-post"
-                                    style={{ fontWeight: '400' }}
-                                >
+                                    style={{ fontWeight: '400' }} >
                                     Submit Post
                                 </a>
                             </li>

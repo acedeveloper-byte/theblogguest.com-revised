@@ -2,11 +2,11 @@
 import React from "react";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import Image from "next/image";
-import Travels from "./Travels";
 import Fashion from "./Fashion";
 import Entertainment from "./Entertainment";
 import Education from "./Education";
 import AllNews from "../AllNews";
+import LifeStyle from "./LifeStyle";
 
 const RecentNews = () => {
   return (
@@ -16,7 +16,7 @@ const RecentNews = () => {
          <AllNews/>
           <Row>
             <Col md={12}>
-              <Travels />
+              <LifeStyle/>
             </Col>
           </Row>
 

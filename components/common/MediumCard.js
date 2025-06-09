@@ -11,7 +11,7 @@ const MediumCard = ({ categoryName, title, shortDescription, image }) => {
         const travelresp = travel.data?.response || [];
         console.log(travelresp)
     }
-    useEffect(() => { handleApi() }, [])
+    useEffect(() => handleApi() , [])
     return (
         <>
             <div className="col-md-6">

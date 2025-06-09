@@ -1,17 +1,19 @@
-'use client';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Slider from 'react-slick';
-import { Col, Card, Button, Spinner } from 'react-bootstrap';
+import { Col, Card, Button } from 'react-bootstrap';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Link from 'next/link';
+import { HOST } from '@/utils/static';
+import moment from 'moment';
 
 // Custom Arrows
 const NextArrow = ({ onClick }) => (
   <button
     className="position-absolute end-0 top-50 translate-middle-y z-2 btn btn-primary rounded-circle"
     onClick={onClick}
-    style={{ right: '-15px' }}>
+    style={{ right: '-15px' }}
+  >
     ❯
   </button>
 );
@@ -26,37 +28,32 @@ const PrevArrow = ({ onClick }) => (
   </button>
 );
 
-const AllNews = () => {
-  const [newsItems, setNewsItems] = useState([]);
-  const [loading, setLoading] = useState(true);
+// Server-side fetch function
+const getData = async () => {
+  const res = await fetch(`${HOST}post/fetch-all-post-by-category/Travel`, {
+    cache: 'no-store', // or revalidate: 60 for ISR
+  });
+  if (!res.ok) throw new Error('Failed to fetch posts');
+  return res.json();
+};
 
-  useEffect(() => {
-    const fetchNews = async () => {
-      try {
-        const res = await fetch('http://localhost:7500/v2/post/fetch-all-post');
-        console.log(res)
-        if (!res.ok) throw new Error('Failed to fetch');
-        const data = await res.json();
+const AllNews = async () => {
+  let newsItems = [];
 
-        console.log("API response:", data); // 🔍 Debug log
+  try {
+    const data = await getData();
 
-        // Adjust this based on your actual API structure
-        const formatted = (data.response || data).map((item) => ({
-          title: item.title || 'No Title',
-          date:  item.date || 'No Date',
-          image:  item.image || '/images/default-image.jpg',
-        }));
-
-        setNewsItems(formatted);
-      } catch (error) {
-        console.error('Fetch error:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchNews();
-  }, []);
+    newsItems = (data.response || data).map((item) => ({
+      title: item.title || 'No Title',
+      date: item.date || item.createdAt || new Date().toISOString(),
+      image: item.image ? `${HOST}resources/post/${item.image}` : '/images/default-image.jpg',
+      author_name: item.author_name || 'theblogguest',
+      url: item.url || '/',
+      category: item.category || 'Travel', // You can adjust category here
+    }));
+  } catch (error) {
+    console.error('Fetch error:', error);
+  }
 
   const settings = {
     dots: false,
@@ -73,34 +70,28 @@ const AllNews = () => {
     <Col md={12} className="position-relative">
       <h5 className="border-start border-3 border-danger ps-2 mb-3">Recent News</h5>
 
-      {loading ? (
-        <div className="text-center py-5">
-          <Spinner animation="border" variant="primary" />
-        </div>
-      ) : newsItems.length === 0 ? (
-        <div className="text-center text-muted">No news found.</div>
-      ) : (
-        <Slider {...settings}>
-          {newsItems.map((item, index) => (
-            <div key={index}>
-              <Link href="/blog" className="text-decoration-none text-white">
-                <Card className="text-white">
-                  <Card.Img src={item.image} alt={item.title} />
-                  <Card.ImgOverlay className="bg-dark bg-opacity-50 d-flex flex-column justify-content-end">
-                    <div>
-                      <Button size="sm" className="mb-2 news-button-layouts">
-                        {item.category}
-                      </Button>
-                      <Card.Title className="fw-bold">{item.title}</Card.Title>
-                      <Card.Text className="small">{item.createdAt}</Card.Text>
-                    </div>
-                  </Card.ImgOverlay>
-                </Card>
-              </Link>
-            </div>
-          ))}
-        </Slider>
-      )}
+      <Slider {...settings}>
+        {newsItems.map((item, index) => (
+          <div key={index}>
+            <Link href={`/${item.url}`} className="text-decoration-none text-white">
+              <Card className="text-white">
+                <Card.Img src={item.image} alt={item.title} />
+                <Card.ImgOverlay className="bg-dark bg-opacity-50 d-flex flex-column justify-content-end">
+                  <div>
+                    <Button size="sm" className="mb-2 news-button-layouts">
+                      {item.category}
+                    </Button>
+                    <Card.Title className="fw-bold">{item.title}</Card.Title>
+                    <Card.Text className="small">
+                      {moment(item.date).format('MMMM Do YYYY')} / {item.author_name}
+                    </Card.Text>
+                  </div>
+                </Card.ImgOverlay>
+              </Card>
+            </Link>
+          </div>
+        ))}
+      </Slider>
     </Col>
   );
 };
